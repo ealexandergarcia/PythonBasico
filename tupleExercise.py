@@ -1,40 +1,34 @@
-"""
-tupla info
-tupla dirreccion
-tupla educacion
-tupla de exp laboral"""
+from os import system #import of the standard function os.system()
+
 #Tupla de informacion general del user
-nombre = input("Ingrese el nombre: ")
-edad = input("Ingrese la edad: ")
-altura = input("Ingrese la altura: ")
-info = (nombre,edad,altura)
+name = input("Ingrese el nombre: ")
+age = input("Ingrese la edad: ")
+height = input("Ingrese la altura: ")
+basicInfo = (name,age,height)
 
 #Tupla sobre las direcciones del user
 x = input("Tiene mas de una direccion? (si/no)")
 if x.lower() == "si":
-    direccion = input("Ingrese el su direccion: ")
-    direccion1 = input("Ingrese el su direccion: ")
+    address = input("Ingrese el su direccion: ")
+    address1 = input("Ingrese el su direccion: ")
 else:
-    direccion = input("Ingrese el su direccion: ")
-    direccion1= "Ninguna"
-
-direcciones = (direccion,direccion1)
-
+    address = input("Ingrese el su direccion: ")
+    address1= "no aplica"
+addresses = (address,address1)
 
 #Tupla sobre la educacion del user
 askBasicEdu = input("Cuenta con algun curso tecnico/tecnologo? (si/no): ")
-basicEdu = "No tiene curso tecnico/tecnologo"
-askProfessionalEdu = input("Cuenta con algun titulo universitario? (si/no): ")
-professionalEdu = "No tiene titulo universitario"
+basicEdu = "no aplica"
+professionalEdu = "no aplica"
 if askBasicEdu.lower() == "si":
     print("Ingrese el nombre del curso")
     basicEdu = input("")
-elif askProfessionalEdu.lower() == "si":
-    print("Ingrese el nombre del titulo")
-    professionalEdu = input("")
 
+askProfessionalEdu = input("Cuenta con algun titulo universitario? (si/no): ")
+if askProfessionalEdu.lower() == "si":
+    print("Ingrese el nombre del titulo")
+    professionalEdu = input("")  
 education = (basicEdu,professionalEdu)
-print(education)
 
 #Tupla sobre la exp laboral
 ask = input("Tiene experiencia laboral? (si/no)")
@@ -49,7 +43,25 @@ if ask.lower() == "si":
 else:
     experience= "no aplica"
     experience1= "no aplica"
-print("exp laboral:")
 workExperience = (experience,experience1)
-print(f"""Primer experiencia laboral: {workExperience[0]}
+
+system("clear")
+
+print(f"""
+---------------------------------------------------
+INFORMACION BASICA    
+Nombre: {basicInfo[0]}
+Edad: {basicInfo[1]}
+Altura: {basicInfo[2]}
+---------------------------------------------------
+DIRECCIONES 
+Direccion principal: {addresses[0]}
+Direccion secundaria: {addresses[1]}
+---------------------------------------------------
+INFORMACION ACADEMICA
+Curso tecnico/tecnologo: {education[0]}
+Titulo universitario: {education[1]}
+---------------------------------------------------
+EXPERIENCIA LABORAL
+Primer experiencia laboral: {workExperience[0]}
 Segunda experiencia laboral: {workExperience[1]} """)
