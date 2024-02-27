@@ -38,8 +38,8 @@ panaderia_dict = {
         "Madeleines": 2250
     },
     "Promociones": {
-            "Baguette": 1000, "cantidad": 3,
-            "Centeno": 1000, "cantidad": 3
+            "Baguette": 1000,
+            "Centeno": 1000
         }
 }
 
@@ -59,14 +59,21 @@ if categoria_elegida in panaderia_dict:
     selection = input(f"""Que producto desea: """)
     if selection in catSel:
         amount= int(input(f"""Cuantos {selection} desea: """))
-        finalPrice = amount * panaderia_dict[categoria_elegida][selection]
+        finalPrice = amount * catSel[selection]
+
+        # Verificar si hay una promoción para este producto
+        if selection in panaderia_dict["Promociones"]:
+            promo_price = panaderia_dict["Promociones"][selection]
+            print(f"¡Hay una promoción! Precio con descuento: ${promo_price}")
+            finalPrice = amount * promo_price
+
         print(f"""El valor de su compra es de: ${finalPrice}""")
         dinero = int(input("Ingrese la cantidad de dinero disponible: "))
         vueltos = finalPrice - dinero
         if finalPrice <= dinero:
             print(f"Tome su {selection} disfrutela rey, sus vueltos son {-vueltos}")
         else:
-            print(f"Usuario el producto que desea comprar {selection} con un valor de ${panaderia_dict[categoria_elegida][selection]}, le falta un total de ${vueltos}")
+            print(f"Usuario el producto que desea comprar {selection} con un valor de ${catSel[selection]}, le falta un total de ${vueltos}")
     else:
         print("Categoría no válida. Por favor, elige una categoría existente.")
 
