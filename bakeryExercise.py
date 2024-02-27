@@ -11,10 +11,7 @@ panaderia_dict = {
         "Nueces": 3500,
         "Pasas": 3000,
         "Queso": 3750,
-        "Aceitunas": 3500,
-        "Promociones": 
-            ([{"Baguette": 1000, "cantidad": 3},
-              {"Baguette": 1000, "cantidad": 3}])
+        "Aceitunas": 3500
     },
     "Bolleria": {
         "Croissant": 1500,
@@ -39,33 +36,39 @@ panaderia_dict = {
         "Biscotti": 2000,
         "Galletas de jengibre": 1500,
         "Madeleines": 2250
-    }
+    },
+    "Promociones": {
+            "Baguette": 1000, "cantidad": 3,
+            "Centeno": 1000, "cantidad": 3
+        }
 }
 
 
 print("Categorías disponibles:")
-for i,categoria in enumerate(panaderia_dict):
-    print(f"{i}. {categoria}")
+for categoria in panaderia_dict:
+    print(f" - {categoria}")
 
 categoria_elegida = input("Elige una categoría (Pan/Bollería/Galletas y pastas): ").capitalize()
 if categoria_elegida in panaderia_dict:
     print(f"Productos en la categoría {categoria_elegida}:")
-    for producto, precio in panaderia_dict[categoria_elegida].items():
-        print(f"  - {producto}: ${precio}")
-else:
-    print("Categoría no válida. Por favor, elige una categoría existente.")
-
-
-selection = input(f"""Que producto desea: """)
-if selection in panaderia_dict[categoria_elegida]:
-    amount= int(input(f"""Cuantos {selection} desea: """))
-    finalPrice = amount * panaderia_dict[categoria_elegida][selection]
-    print(f"""El valor de su compra es de: ${finalPrice}""")
-    dinero = int(input("Ingrese la cantidad de dinero disponible: "))
-    vueltos = finalPrice - dinero
-    if finalPrice <= dinero:
-        print(f"Tome su {selection} disfrutela rey, sus vueltos son {-vueltos}")
+    catSel =panaderia_dict[categoria_elegida]
+    for producto, precio in catSel.items():
+        if producto != "Promociones":
+            print(f"  - {producto}: ${precio}")
+    
+    selection = input(f"""Que producto desea: """)
+    if selection in catSel:
+        amount= int(input(f"""Cuantos {selection} desea: """))
+        finalPrice = amount * panaderia_dict[categoria_elegida][selection]
+        print(f"""El valor de su compra es de: ${finalPrice}""")
+        dinero = int(input("Ingrese la cantidad de dinero disponible: "))
+        vueltos = finalPrice - dinero
+        if finalPrice <= dinero:
+            print(f"Tome su {selection} disfrutela rey, sus vueltos son {-vueltos}")
+        else:
+            print(f"Usuario el producto que desea comprar {selection} con un valor de ${panaderia_dict[categoria_elegida][selection]}, le falta un total de ${vueltos}")
     else:
-        print(f"Usuario el producto que desea comprar {selection} con un valor de ${panaderia_dict[categoria_elegida][selection]}, le falta un total de ${vueltos}")
+        print("Categoría no válida. Por favor, elige una categoría existente.")
+
 else:
     print("Categoría no válida. Por favor, elige una categoría existente.")
