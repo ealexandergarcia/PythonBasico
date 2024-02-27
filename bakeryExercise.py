@@ -1,15 +1,20 @@
+from os import system #import of the standard function os.system()
+system("clear")
 panaderia_dict = {
     "Pan": {
         "Baguette": 2500,
-        "Pan integral": 3000,
-        "Pan de centeno": 2750,
-        "Pan de molde": 2250,
-        "Pan de maíz": 2500,
-        "Pan de avena": 3250,
-        "Pan de nueces": 3500,
-        "Pan de pasas": 3000,
-        "Pan de queso": 3750,
-        "Pan de aceitunas": 3500
+        "Integral": 3000,
+        "Centeno": 2750,
+        "Molde": 2250,
+        "Maiz": 2500,
+        "Avena": 3250,
+        "Nueces": 3500,
+        "Pasas": 3000,
+        "Queso": 3750,
+        "Aceitunas": 3500,
+        "Promociones": 
+            ([{"Baguette": 1000, "cantidad": 3},
+              {"Baguette": 1000, "cantidad": 3}])
     },
     "Bolleria": {
         "Croissant": 1500,
@@ -44,7 +49,7 @@ for i,categoria in enumerate(panaderia_dict):
 
 categoria_elegida = input("Elige una categoría (Pan/Bollería/Galletas y pastas): ").capitalize()
 if categoria_elegida in panaderia_dict:
-    print(f"Productos en la categoría '{categoria_elegida}':")
+    print(f"Productos en la categoría {categoria_elegida}:")
     for producto, precio in panaderia_dict[categoria_elegida].items():
         print(f"  - {producto}: ${precio}")
 else:
@@ -55,6 +60,12 @@ selection = input(f"""Que producto desea: """)
 if selection in panaderia_dict[categoria_elegida]:
     amount= int(input(f"""Cuantos {selection} desea: """))
     finalPrice = amount * panaderia_dict[categoria_elegida][selection]
-    print(finalPrice)
+    print(f"""El valor de su compra es de: ${finalPrice}""")
+    dinero = int(input("Ingrese la cantidad de dinero disponible: "))
+    vueltos = finalPrice - dinero
+    if finalPrice <= dinero:
+        print(f"Tome su {selection} disfrutela rey, sus vueltos son {-vueltos}")
+    else:
+        print(f"Usuario el producto que desea comprar {selection} con un valor de ${panaderia_dict[categoria_elegida][selection]}, le falta un total de ${vueltos}")
 else:
     print("Categoría no válida. Por favor, elige una categoría existente.")
